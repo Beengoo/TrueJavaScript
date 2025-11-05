@@ -6,5 +6,6 @@ folia-supported: true
 description: Allows to load java source code into JVM runtime
 commands:
   scripts:
+    permission: truejavascript.command
     description: Reload all Java scripts
     usage: /scripts reload
