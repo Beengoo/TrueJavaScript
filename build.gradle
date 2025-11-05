@@ -1,10 +1,18 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'ua.beengoo'
-version = '1.0-SNAPSHOT'
+
+
+def refType = System.getenv("GITHUB_REF_TYPE")
+def refName = System.getenv("GITHUB_REF_NAME")
+def envVersion = System.getenv("VERSION") ?: System.getenv("RELEASE_VERSION")
+def computedVersion = (refType == 'tag' && refName) ? refName : (envVersion ?: 'devbuild')
+
+version = computedVersion
 
 repositories {
     mavenCentral()
@@ -20,6 +28,22 @@ dependencies {
 
 runPaper.folia.registerTask() {
     minecraftVersion("1.21.6")
+}
+
+tasks.named('runServer') {
+    dependsOn tasks.named('shadowJar')
+}
+
+tasks.named('shadowJar') {
+    archiveClassifier.set('')
+}
+
+tasks.named('jar') {
+    enabled = false
+}
+
+tasks.named('assemble') {
+    dependsOn tasks.named('shadowJar')
 }
 
 
