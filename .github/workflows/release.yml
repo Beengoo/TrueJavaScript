@@ -37,7 +37,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: ScriptSmith ${{ github.ref_name }}
+          name: TrueJavaScript ${{ github.ref_name }}
           generate_release_notes: true
           files: |
             build/libs/*.jar
