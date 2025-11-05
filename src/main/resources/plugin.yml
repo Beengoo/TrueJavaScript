@@ -1,0 +1,10 @@
+name: TrueJavaScript
+version: '1.0-SNAPSHOT'
+main: ua.beengoo.trueJavaScript.TrueJavaScript
+api-version: '1.21'
+folia-supported: true
+description: Allows to load java source code into JVM runtime
+commands:
+  scripts:
+    description: Reload all Java scripts
+    usage: /scripts reload
